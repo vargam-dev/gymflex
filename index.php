@@ -31,7 +31,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
             exit();
         }
 
-    }   else {
+    }   
+        else {
         $_SESSION['error'] = "Wrong Username or Password";
         $conn->close();
         header('location: index.php');
@@ -82,6 +83,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
                     unset($_SESSION['error']);
                 }
                 ?>
+                <?php 
+                if (isset($_SESSION['success-message'])) {
+                       echo '
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <span class="material-symbols-rounded align-middle me-2">done_all</span>
+                            <div>' .$_SESSION['success-message']. '</div>
+                        </div>
+                        ';
+                    unset($_SESSION['success-message']);
+                }
+                ?>
                     <div class="card card-body p-4">
                         <h4 class="text-center">Welcome Back</h4>
                         <p class="mb-4 text-muted text-center">
@@ -118,12 +130,48 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
                             <hr class="mt-4 mb-3" />
                             <p class="text-muted text-center">
                                 Don’t have an account yet?
-                                <a href="#" class="ms-2 text-body">Sign Up</a>
+                                <a href="register.php" class="ms-2 text-body">Sign Up</a>
                             </p>
                         </form>
                     </div>
+
+                   
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="position-absolute top-0 left-0 ms-2 mt-2">
+        <!--offcanvas example-->
+        <!-- Button trigger offcanvas -->
+        <button type="button" class="btn btn-primary btn-lg border-0 d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#exampleOffcanvas">
+            Demo <span class="material-symbols-rounded ms-2"> login </span>
+        </button>
+        <!-- Offcanvas -->
+        <div class="offcanvas offcanvas-end" id="exampleOffcanvas" tabindex="-1"
+            aria-labelledby="exampleOffcanvasLabel" aria-hidden="true">
+            <div class="offcanvas-header">
+                <h5 class="mb-0">Demo Credentials.</h5>
+                <button type="button" class="btn-close" data-bs-target="exampleOffcanvas" data-bs-dismiss="offcanvas"></button>
+            </div>
+                <div class="offcanvas-body">
+                    <div class="row flex-column">
+                        <hr />
+                        <div class="col-12">
+                            <h5 class="text-primary">Username</h5>
+                            <p class="fs-5">admin</p>
+                        </div>
+                        <hr />
+                        <div class="col-12">
+                            <h5 class="text-primary">Password</h5>
+                            <p class="fs-5">admin</p>
+                        </div>
+                        <hr />
+                        <div class="col-12">
+                            <p class="text-primary"><a href="register.php">You can create own account 😄 </a></p>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 

@@ -11,6 +11,14 @@ if(!isset($_SESSION['admin_id'])) {
     exit();
 } 
 
+$admin_id = $_SESSION['admin_id'];
+
+$sql = "SELECT username, first_name, last_name, email FROM `admins` WHERE admin_id = $admin_id";
+$run = $conn->query($sql);
+$results = $run->fetch_all(MYSQLI_ASSOC);
+
+
+
 ?>
 
 
@@ -29,7 +37,9 @@ if(!isset($_SESSION['admin_id'])) {
             <div class="position-relative container">
               <div class="row align-items-center position-relative">
                 <div class="col-md-7 mb-2 mb-md-0">
-                  <h3 class="mb-0">Welcome back, <?php $_SESSION['admin_name']  ?>!</h3>
+                  <?php  foreach($results as $result) : ?>
+                  <h3 class="mb-0">Welcome back, <span class="text-capitalize"><?php echo $result['first_name'] ?>!</span></h3>
+                  <?php endforeach; ?>
                 </div>
                 <div class="col-md-5">
                   <nav aria-label="breadcrumb" class="d-md-flex justify-content-md-end">

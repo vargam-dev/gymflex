@@ -133,6 +133,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
                                                     <th>Trainer</th>
                                                     <th>Training Plan</th>
                                                     <th>Access Card</th>
+                                                    <th>Created at</th>
                                                     <th class="text-end">Action</th>
                                                 </tr>
                                             </thead>
@@ -181,6 +182,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
                                                         ?>
                                                     </td>
                                                     <td><a href="<?php echo $result['access_card_pdf_path'] ?>" target="_blank">Access Card</a></td>
+                                                    <td>
+                                                    <?php 
+                                                        $originalDate = $result['date'];
+
+                                                        $dateObject = new DateTime($originalDate);
+
+                                                        $formatDate = $dateObject->format('d.m.Y');
+
+                                                        echo $formatDate;
+                                                    ?>
+                                                    </td>
                                                     <td class="text-end">
                                                         <div class="drodown">
                                                             <a data-bs-toggle="dropdown" href="#" class="btn p-1">
@@ -251,7 +263,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 
                                         <div class="col-md-6">
                                             <label for="inputPhone" class="form-label">Phone</label>
-                                            <input type="text" name="phone" class="form-control" id="inputPhone">
+                                            <input type="text" name="phone" class="form-control" id="inputPhone maskPhone" data-inputmask='"mask": "(999)-999-9999"'>
+
                                         </div>
 
                                         <div class="col-md-6">
@@ -314,5 +327,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
 </script>
+
+<script>
+    Inputmask().mask(document.querySelectorAll("[data-inputmask]"));
+</script>
+
 </body>
 </html>
