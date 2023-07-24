@@ -4,7 +4,7 @@ session_start();
 
 $server = 'localhost';
 $username = 'root';
-$password = 'xyzdesign';
+$password = '';
 $db_name = 'gymflex';
 
 $conn = mysqli_connect($server, $username, $password, $db_name);
